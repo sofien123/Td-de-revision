@@ -1,0 +1,102 @@
+public class position
+{
+   private int x;
+   private int y;
+   public position()
+   {
+     x=0;
+     y=0;
+   }
+   public position(int abcisse,int ordonnée)
+   {
+       x=abcisse;
+       y=ordonnée;
+   }
+   public void avancer_abcisse()
+   {
+     x++;
+   }
+   public void avancer_ordonnée()
+   {
+      y++;
+   }
+   public String toString()
+   { 
+      String chaine;
+      chaine+="(";
+      chaine+=x;
+      chaine+=",";
+      chaine+=y;
+      chaine+=")";
+      return chaine;
+   }
+}
+public class Robot
+{
+  protected String Nom;
+  protected String direction;
+  protected position pos;
+  public Robot(String unn,position posi=position(0,0),String directi="Est")
+  {
+     pos=posi;
+     Nom=unn;
+     direction=directi;
+  }
+  public void avance()
+  {
+    if(direction=="Nord")
+        pos.avancer_ordonnée();
+    if(direction=="Est")
+        pos.avancer_abcisse();
+  }
+  public void tourner_droit_90()
+  {
+     switch(direction)
+     {
+        case "Nord":direction="Est";break;
+        case "Est":direction="Sud";break;
+        case "Sud":direction="Ouest";break;
+        case "Ouest":direction="Nord";break;
+     }
+  }
+  public String toString()
+  {
+    String chaine;
+    chaine="Je suis le robot ";
+    chaine+=Nom;
+    chaine+=",";
+    chaine+="ma position est ";
+    chaine+=pos.toString();
+    chaine+=" ma direction est ";
+    chaine+=direction;
+    return chaine;
+  }
+}
+public class RobotNG extends Robot
+{
+  public void avance(int n)
+  {
+      for( i=0;i<n;i++)
+         avance();
+  }
+  public void tourner_gauche_90()
+  {
+    switch(direction)
+     {
+        case "Nord":direction="Ouest";break;
+        case "Est":direction="Nord";break;
+        case "Sud":direction="Est";break;
+        case "Ouest":direction="Sud";break;
+     }
+  }
+  public void demi_Tour()
+  {
+    switch(direction)
+     {
+        case "Nord":direction="Sud";break;
+        case "Est":direction="Ouest";break;
+        case "Sud":direction="Nord";break;
+        case "Ouest":direction="Est";break;
+     }
+  }
+}
